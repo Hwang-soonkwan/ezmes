@@ -5,6 +5,8 @@
         </v-card-title>
 
         <v-card-text>
+            <EquipmentId offline label="EquipmentId" v-model="item.equipmentId" :editMode="false" :key="false" @change="change" />
+            <WorkerId offline label="WorkerId" v-model="item.workerId" :editMode="false" :key="false" @change="change" />
         </v-card-text>
 
         <v-card-actions>

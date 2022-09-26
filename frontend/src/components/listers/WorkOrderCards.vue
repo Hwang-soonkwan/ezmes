@@ -68,6 +68,8 @@
             me.values = temp.data._embedded.workOrders;
             
             me.newValue = {
+                'equipmentId': {},
+                'workerId': {},
             }
         },
         methods:{

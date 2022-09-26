@@ -24,6 +24,20 @@ public class WorkOrder  {
     
     
     private Long id;
+    
+    
+    
+    @Embedded
+    @AttributeOverride(name="id", column= @Column(name="equipmentIdId", nullable=true))
+
+    private EquipmentId equipmentId;
+    
+    
+    
+    @Embedded
+    @AttributeOverride(name="id", column= @Column(name="workerIdId", nullable=true))
+
+    private WorkerId workerId;
 
     @PostPersist
     public void onPostPersist(){

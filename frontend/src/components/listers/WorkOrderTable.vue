@@ -67,6 +67,8 @@
             headers: 
                 [
                     { text: "id", value: "id" },
+                    { text: "equipmentId", value: "equipmentId" },
+                    { text: "workerId", value: "workerId" },
                 ],
             workOrder : [],
             newValue: {},
@@ -84,6 +86,8 @@
             this.values = temp.data._embedded.workorders;
 
             this.newValue = {
+                'equipmentId': {},
+                'workerId': {},
             }
         },
         methods: {

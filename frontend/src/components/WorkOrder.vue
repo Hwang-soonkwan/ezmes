@@ -17,6 +17,8 @@
         </v-card-title >
 
         <v-card-text>
+            <EquipmentId offline label="EquipmentId" v-model="value.equipmentId" :editMode="editMode" @change="change"/>
+            <WorkerId offline label="WorkerId" v-model="value.workerId" :editMode="editMode" @change="change"/>
         </v-card-text>
 
         <v-card-actions>
