@@ -17,32 +17,21 @@ public class Equipment  {
     
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
     private Long id;
-    
-    
-    
-    
     
     private String name;
 
     @PostPersist
     public void onPostPersist(){
 
-
         EquipmentRegistered equipmentRegistered = new EquipmentRegistered(this);
         equipmentRegistered.publishAfterCommit();
-
-
 
         EquipmentChanged equipmentChanged = new EquipmentChanged(this);
         equipmentChanged.publishAfterCommit();
 
     }
+
     @PreUpdate
     public void onPreUpdate(){
     }
