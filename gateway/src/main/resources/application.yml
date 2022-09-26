@@ -1,0 +1,82 @@
+server:
+  port: 8088
+
+---
+
+spring:
+  profiles: default
+  cloud:
+    gateway:
+      routes:
+        - id: work-order
+          uri: http://localhost:8081
+          predicates:
+            - Path=/workOrders/**, /workerStandardInformations/**, /작지발행화면/**
+        - id: mes
+          uri: http://localhost:8082
+          predicates:
+            - Path=/productionManagements/**, /작지변경요청화면/**
+        - id: master
+          uri: http://localhost:8083
+          predicates:
+            - Path=/equipment/**, /workers/**, /기준정보/**
+        - id: 생산현황관리
+          uri: http://localhost:8084
+          predicates:
+            - Path=, /생산현황판/**
+        - id: frontend
+          uri: http://localhost:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+
+---
+
+spring:
+  profiles: docker
+  cloud:
+    gateway:
+      routes:
+        - id: work-order
+          uri: http://workOrder:8080
+          predicates:
+            - Path=/workOrders/**, /workerStandardInformations/**, /작지발행화면/**
+        - id: mes
+          uri: http://mes:8080
+          predicates:
+            - Path=/productionManagements/**, /작지변경요청화면/**
+        - id: master
+          uri: http://master:8080
+          predicates:
+            - Path=/equipment/**, /workers/**, /기준정보/**
+        - id: 생산현황관리
+          uri: http://생산현황관리:8080
+          predicates:
+            - Path=, /생산현황판/**
+        - id: frontend
+          uri: http://frontend:8080
+          predicates:
+            - Path=/**
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins:
+              - "*"
+            allowedMethods:
+              - "*"
+            allowedHeaders:
+              - "*"
+            allowCredentials: true
+
+server:
+  port: 8080
