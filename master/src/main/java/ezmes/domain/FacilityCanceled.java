@@ -11,10 +11,13 @@ public class FacilityCanceled extends AbstractEvent {
 
     private Long id;
 
-    public FacilityCanceled(Equipment aggregate){
+    public FacilityCanceled(Worker aggregate) {
         super(aggregate);
     }
-    public FacilityCanceled(){
+
+    public FacilityCanceled() {
         super();
     }
+    // keep
+
 }

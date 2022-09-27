@@ -123,22 +123,22 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: 생산현황관리
+  name: prodStatus
   labels:
-    app: 생산현황관리
+    app: prodStatus
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: 생산현황관리
+      app: prodStatus
   template:
     metadata:
       labels:
-        app: 생산현황관리
+        app: prodStatus
     spec:
       containers:
-        - name: 생산현황관리
-          image: username/생산현황관리:latest
+        - name: prodStatus
+          image: username/prodStatus:latest
           ports:
             - containerPort: 8080
           readinessProbe:
@@ -216,13 +216,13 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: 생산현황관리
+  name: prodStatus
   labels:
-    app: 생산현황관리
+    app: prodStatus
 spec:
   ports:
     - port: 8080
       targetPort: 8080
   selector:
-    app: 생산현황관리
+    app: prodStatus
 

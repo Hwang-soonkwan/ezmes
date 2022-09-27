@@ -1,59 +1,50 @@
 package ezmes.domain;
 
-import ezmes.domain.WorkerRegistered;
-import ezmes.domain.WorkerChanged;
-import ezmes.domain.WorkerCanceled;
 import ezmes.MasterApplication;
-import javax.persistence.*;
-import java.util.List;
-import lombok.Data;
+import ezmes.domain.WorkerCanceled;
+import ezmes.domain.WorkerChanged;
+import ezmes.domain.WorkerRegistered;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.*;
+import lombok.Data;
 
 @Entity
-@Table(name="Worker_table")
+@Table(name = "Worker_table")
 @Data
+public class Worker {
 
-public class Worker  {
-
-    
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
-    
-    
-    
-    
-    
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @PostPersist
-    public void onPostPersist(){
-
-
+    public void onPostPersist() {
         WorkerRegistered workerRegistered = new WorkerRegistered(this);
         workerRegistered.publishAfterCommit();
-
-
 
         WorkerChanged workerChanged = new WorkerChanged(this);
         workerChanged.publishAfterCommit();
 
-
-
         WorkerCanceled workerCanceled = new WorkerCanceled(this);
         workerCanceled.publishAfterCommit();
-
     }
 
-    public static WorkerRepository repository(){
-        WorkerRepository workerRepository = MasterApplication.applicationContext.getBean(WorkerRepository.class);
+    public static WorkerRepository repository() {
+        WorkerRepository workerRepository = MasterApplication.applicationContext.getBean(
+            WorkerRepository.class
+        );
         return workerRepository;
     }
 
+    public void facilityCancellation() {
+        FacilityCanceled facilityCanceled = new FacilityCanceled(this);
+        facilityCanceled.publishAfterCommit();
+    }
 
-
-
-    public static void 변경요청(WorkerChangeRequested workerChangeRequested){
-
+    public static void requestForChange(
+        WorkerChangeRequested workerChangeRequested
+    ) {
         /** Example 1:  new item 
         Worker worker = new Worker();
         repository().save(worker);
@@ -71,8 +62,5 @@ public class Worker  {
          });
         */
 
-        
     }
-
-
 }
